@@ -1,7 +1,10 @@
 package com.candidate.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.candidate.classes.Candidate;
+import com.candidate.dao.CandidateDAO;
 
 @Controller
 @RequestMapping("/applications")
 public class CandidateController {
 
+	// need to inject candidateDAO
+	@Autowired
+	private CandidateDAO candidateDOA;
+	
 	@RequestMapping("/candidateForm")
 	public String candidateForm(Model theModel) {
 
@@ -46,6 +54,18 @@ public class CandidateController {
 		} else {
 			return "confirmation-page";
 		}
+	}
+	
+	@RequestMapping("/list")
+	public String listCandidates(Model theModel) {
+		
+		// get candidate from dao
+		List<Candidate> theCandidates = candidateDOA.getCandidates();
+		// add the candidate to the model
+		theModel.addAttribute("candidates", theCandidates);
+		
+		
+		return "list-candidates";
 	}
 	
 	@InitBinder

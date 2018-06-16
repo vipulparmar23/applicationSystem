@@ -2,36 +2,46 @@ package com.candidate.classes;
 
 import java.util.HashMap;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Candidate {
+
+	@Id
+	@GeneratedValue
+	private String id;
 
 	private String firstName;
 
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "Last name is required")
+	@Size(min = 1, message = "Last name is required")
 	private String lastName;
 
 	@Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Invalid Email")
 	private String emailId;
 
+	@Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", message = "Invalid phone number")
+	private String phoneNumber;
+
 	private String address;
 	private String city;
 	private String state;
-	//@Pattern(regexp =  "[a-zA-Z0-9]", message = "Invalid Postal address")
-	@NotNull(message = "is required")
-	@Size(min = 5, message = "Should be minimum 5 letters.")
+
+	@NotNull(message = "Postal code is required")
 	private String postalCode;
 	private String country;
-
+	private String institute;
+	private String education;
+	
 	private HashMap<String, String> countryOptions;
 	private HashMap<String, String> educationLevel;
 	private HashMap<String, String> allStates;
 	private String[] knownLanguages;
-
-	private String education;
 
 	public Candidate() {
 		countryOptions = new HashMap<>();
@@ -50,6 +60,20 @@ public class Candidate {
 		educationLevel.put("Masters", "Masters");
 		educationLevel.put("Doctorate", "Doctorate");
 		educationLevel.put("Other", "Other");
+
+		allStates = new HashMap<>();
+
+		allStates.put("Ontario", "Ontario");
+		allStates.put("Quebec", "Quebec");
+		allStates.put("Manitoba", "Manitoba");
+		allStates.put("Alberta", "Alberta");
+		allStates.put("Saskatchewan", "Saskatchewan");
+		allStates.put("British Columbia", "British Columbia");
+		allStates.put("Nova Scotia", "Nova Scotia");
+		allStates.put("New Brunswick", "New Brunswick");
+		allStates.put("Prince Edward Island", "Prince Edward Island");
+		allStates.put("Newfoundland and Labrador", "Newfoundland and Labrador");
+
 	}
 
 	// Getters and Setters for personal information
@@ -160,4 +184,27 @@ public class Candidate {
 		this.educationLevel = educationLevel;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getInstitute() {
+		return institute;
+	}
+
+	public void setInstitute(String institute) {
+		this.institute = institute;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }
