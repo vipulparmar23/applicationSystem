@@ -2,36 +2,75 @@ package com.candidate.classes;
 
 import java.util.HashMap;
 
+
+import javax.persistence.Column;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+@Entity
 public class Candidate {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private long id;
+
+	@Column(name = "first_name")
 	private String firstName;
 
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@NotNull(message = "Last name is required")
+	@Size(min = 1, message = "Last name is required")
+	@Column(name = "last_name")
 	private String lastName;
 
+	@Column(name = "email_id")
 	@Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Invalid Email")
 	private String emailId;
 
+	@Column(name = "phone_number")
+	@Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", message = "Invalid phone number")
+	private String phoneNumber;
+
+	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "state")
 	private String state;
-	//@Pattern(regexp =  "[a-zA-Z0-9]", message = "Invalid Postal address")
-	@NotNull(message = "is required")
-	@Size(min = 5, message = "Should be minimum 5 letters.")
+
+	@Column(name = "postal_code")
+	@NotNull(message = "Postal code is required")
 	private String postalCode;
+	
+	@Column(name = "country")
 	private String country;
-
-	private HashMap<String, String> countryOptions;
-	private HashMap<String, String> educationLevel;
-	private HashMap<String, String> allStates;
-	private String[] knownLanguages;
-
+	
+	@Column(name = "institute")
+	private String institute;
+	
+	@Column(name = "education")
 	private String education;
+	
+	@Transient
+	private HashMap<String, String> countryOptions;
+	@Transient
+	private HashMap<String, String> educationLevel;
+	@Transient
+	private HashMap<String, String> allStates;
+	
+	
+	@Transient
+	private String[] knownLanguages;
 
 	public Candidate() {
 		countryOptions = new HashMap<>();
@@ -50,6 +89,20 @@ public class Candidate {
 		educationLevel.put("Masters", "Masters");
 		educationLevel.put("Doctorate", "Doctorate");
 		educationLevel.put("Other", "Other");
+
+		allStates = new HashMap<>();
+
+		allStates.put("Ontario", "Ontario");
+		allStates.put("Quebec", "Quebec");
+		allStates.put("Manitoba", "Manitoba");
+		allStates.put("Alberta", "Alberta");
+		allStates.put("Saskatchewan", "Saskatchewan");
+		allStates.put("British Columbia", "British Columbia");
+		allStates.put("Nova Scotia", "Nova Scotia");
+		allStates.put("New Brunswick", "New Brunswick");
+		allStates.put("Prince Edward Island", "Prince Edward Island");
+		allStates.put("Newfoundland and Labrador", "Newfoundland and Labrador");
+
 	}
 
 	// Getters and Setters for personal information
@@ -160,4 +213,27 @@ public class Candidate {
 		this.educationLevel = educationLevel;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getInstitute() {
+		return institute;
+	}
+
+	public void setInstitute(String institute) {
+		this.institute = institute;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }
