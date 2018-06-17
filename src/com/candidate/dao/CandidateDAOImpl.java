@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.candidate.classes.Candidate;
 
@@ -18,8 +17,7 @@ public class CandidateDAOImpl implements CandidateDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Override
-	@Transactional
+	@Override	
 	public List<Candidate> getCandidates() {
 	
 		// get the current hibernate session
@@ -34,6 +32,16 @@ public class CandidateDAOImpl implements CandidateDAO {
 		
 		// return the results
 		return candidates;
+	}
+
+	@Override
+	public void saveCandidate(Candidate theCandidate) {
+		
+		//get current Hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Save the new candidate
+		currentSession.save(theCandidate);
 	}
 
 }

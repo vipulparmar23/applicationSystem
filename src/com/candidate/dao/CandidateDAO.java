@@ -7,5 +7,7 @@ import com.candidate.classes.Candidate;
 public interface CandidateDAO {
 
 		public List<Candidate> getCandidates();
+
+		public void saveCandidate(Candidate theCandidate);
 	
 }

@@ -12,19 +12,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.candidate.classes.Candidate;
 import com.candidate.dao.CandidateDAO;
+import com.candidate.service.CandidateService;
 
 @Controller
 @RequestMapping("/applications")
 public class CandidateController {
 
-	// need to inject candidateDAO
+	// need to inject CandidateService
 	@Autowired
-	private CandidateDAO candidateDOA;
+	private CandidateService candidateService;
 	
 	@RequestMapping("/candidateForm")
 	public String candidateForm(Model theModel) {
@@ -59,14 +61,25 @@ public class CandidateController {
 	@RequestMapping("/list")
 	public String listCandidates(Model theModel) {
 		
-		// get candidate from dao
-		List<Candidate> theCandidates = candidateDOA.getCandidates();
+		// get candidate from service 
+		List<Candidate> theCandidates = candidateService.getCandidates();
 		// add the candidate to the model
 		theModel.addAttribute("candidates", theCandidates);
 		
 		
 		return "list-candidates";
 	}
+	
+	@PostMapping("/saveCandidate")
+	public String saveCandidate(@Valid @ModelAttribute("candidate") Candidate theCandidate, BindingResult theBindings) {
+		if(theBindings.hasErrors()) {
+			return "candidate-form";
+		}else {
+			candidateService.saveCandidate(theCandidate);
+			return "confirmation-page";
+		}
+	}
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {

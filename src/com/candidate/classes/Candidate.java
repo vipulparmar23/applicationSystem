@@ -2,45 +2,74 @@ package com.candidate.classes;
 
 import java.util.HashMap;
 
+
+import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 
 @Entity
 public class Candidate {
 
 	@Id
 	@GeneratedValue
-	private String id;
+	@Column(name = "id")
+	private long id;
 
+	@Column(name = "first_name")
 	private String firstName;
 
 	@NotNull(message = "Last name is required")
 	@Size(min = 1, message = "Last name is required")
+	@Column(name = "last_name")
 	private String lastName;
 
+	@Column(name = "email_id")
 	@Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", message = "Invalid Email")
 	private String emailId;
 
+	@Column(name = "phone_number")
 	@Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", message = "Invalid phone number")
 	private String phoneNumber;
 
+	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "state")
 	private String state;
 
+	@Column(name = "postal_code")
 	@NotNull(message = "Postal code is required")
 	private String postalCode;
+	
+	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "institute")
 	private String institute;
+	
+	@Column(name = "education")
 	private String education;
 	
+	@Transient
 	private HashMap<String, String> countryOptions;
+	@Transient
 	private HashMap<String, String> educationLevel;
+	@Transient
 	private HashMap<String, String> allStates;
+	
+	
+	@Transient
 	private String[] knownLanguages;
 
 	public Candidate() {
@@ -200,11 +229,11 @@ public class Candidate {
 		this.institute = institute;
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 }
