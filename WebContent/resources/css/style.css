@@ -1,0 +1,36 @@
+th{
+	background-color: #4CAF50;
+	color: white;
+	padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+
+#candidates{
+
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#candidates td, #candidates th{
+	padding: 5px;
+	border: 1px solid #ddd;
+}
+
+a{
+	background-color: #4CAF50;
+	color: white;
+	padding: 6px 20px;
+	text-decoration: none;
+	display:inline-block;
+}
+
+a:hover{
+	background-color: green;
+}
+
+.header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+}
