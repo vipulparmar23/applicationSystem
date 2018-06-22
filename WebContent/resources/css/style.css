@@ -25,6 +25,12 @@ a{
 	display:inline-block;
 }
 
+.noButton{
+	background-color: white;
+	color: black;
+	text-decoration: underline;
+}
+
 a:hover{
 	background-color: green;
 }
@@ -33,4 +39,7 @@ a:hover{
     background-color: #F1F1F1;
     text-align: center;
     padding: 20px;
+}
+.update{
+	background-color:  #134d00;
 }

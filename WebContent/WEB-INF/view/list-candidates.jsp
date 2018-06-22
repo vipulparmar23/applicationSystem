@@ -17,10 +17,9 @@
 	</div>
 <hr>
 <hr>	
-	
-		
 		<table id = "candidates">
 			<tr>
+				<th class="update">Action</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email ID</th>
@@ -36,7 +35,12 @@
 		
 		<c:forEach var = "tempCandidate" items="${candidates}" >
 			
+			<c:url var="updateLink" value="/applications/updateForm">
+				<c:param name ="candidateId" value="${tempCandidate.id}"/>
+			</c:url>
+			
 			<tr>
+				<td> <a href = "${updateLink}" class="noButton">Update </a></td>
 				<td> ${tempCandidate.firstName} </td>
 				<td> ${tempCandidate.lastName} </td>
 				<td> ${tempCandidate.emailId} </td>

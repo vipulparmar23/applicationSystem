@@ -41,7 +41,18 @@ public class CandidateDAOImpl implements CandidateDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// Save the new candidate
-		currentSession.save(theCandidate);
+		currentSession.saveOrUpdate(theCandidate);
+	}
+
+	@Override
+	public Candidate getCandidate(long theId) {
+		// Get current Hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Retrieve from database using primary key
+		Candidate theCandidate = currentSession.get(Candidate.class, theId);
+		
+		return theCandidate;
 	}
 
 }

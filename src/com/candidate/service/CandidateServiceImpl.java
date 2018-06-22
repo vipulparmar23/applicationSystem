@@ -29,4 +29,11 @@ public class CandidateServiceImpl implements CandidateService {
 		
 	}
 
+	@Override
+	@Transactional
+	public Candidate getCandidate(long theId) {
+		// TODO Auto-generated method stub
+		return candidateDOA.getCandidate(theId);
+	}
+
 }
