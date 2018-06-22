@@ -58,11 +58,14 @@ select{
 
 <body>
 	<h2>Application Form</h2>
-	<hr align="left" class = "hr"/>
-	<hr align="left" class = "hr"/>
+	<hr align="left" class = "hr" />
+	<hr align="left" class = "hr" />
 	
 	<form:form action="saveCandidate" modelAttribute="candidate" method = "POST">
 
+			<!-- Need to associate this data with customer id -->
+			
+			<form:hidden path="id"/>
 
 		<!-- FIRST NAME  -->
 		<table>
