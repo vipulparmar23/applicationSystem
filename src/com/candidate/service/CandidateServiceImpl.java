@@ -36,4 +36,11 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateDOA.getCandidate(theId);
 	}
 
+	@Override
+	@Transactional
+	public void deleteCandidate(long theId) {
+		candidateDOA.deleteCandidate(theId);
+		
+	}
+
 }

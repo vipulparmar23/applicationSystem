@@ -11,5 +11,7 @@ public interface CandidateDAO {
 		public void saveCandidate(Candidate theCandidate);
 
 		public Candidate getCandidate(long theId);
+
+		public void deleteCandidate(long theId);
 	
 }

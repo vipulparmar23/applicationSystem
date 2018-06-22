@@ -90,9 +90,16 @@ public class CandidateController {
 		// Set customer as a model attribute to pre-populate the form
 		theModel.addAttribute("candidate", theCandidate);
 		// Send over to our form
-		return "candidate-form";
-		
+		return "candidate-form";	
 	}
+	
+	@GetMapping("/delete")
+	public String deleteForm(@RequestParam("candidateId") long theId) {
+		candidateService.deleteCandidate(theId);
+		return "redirect:/applications/list";
+	}
+	
+	
 	
 	
 	@InitBinder

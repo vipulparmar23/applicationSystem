@@ -39,8 +39,14 @@
 				<c:param name ="candidateId" value="${tempCandidate.id}"/>
 			</c:url>
 			
+			<c:url var = "deleteLink" value = "/applications/delete">
+				<c:param name = "candidateId" value = "${tempCandidate.id}" />
+			</c:url>
+			
 			<tr>
-				<td> <a href = "${updateLink}" class="noButton">Update </a></td>
+				<td> <a href = "${updateLink}" class="noButton">Update </a>
+					 <a href = "${deleteLink}" class= "noButton" onClick= "if(!(confirm('Are you sure you want to delete this candidate?')))return false">Delete</a>
+ 				</td>
 				<td> ${tempCandidate.firstName} </td>
 				<td> ${tempCandidate.lastName} </td>
 				<td> ${tempCandidate.emailId} </td>
